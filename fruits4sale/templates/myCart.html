@@ -1,0 +1,29 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+
+{% if cartData %}
+<div class="container">
+
+	{% for fruitdata in cartData %}
+	<div class="row">
+		<div class="col-3 col-sm-3">
+			<img class="img-thumbnail " src="{{ fruitdata.fruit.image.url }}" />
+		</div>
+		<div class="col-3 col-sm-3">
+			<p>Fruit Name: <b>{{ fruitdata.fruit.fruit_name }}</b></p>
+			<p>Quantity Purchased: <b>{{ fruitdata.quantity_purchased }} {{ fruitdata.fruit.units }}</b></p>
+			<p>Total Amount: <b>Php. {{ fruitdata.total_amount|floatformat:2 }}</b></p>
+			<p>Date: <b>{{ fruitdata.date }}</b></p>
+		</div>
+	</div>
+	<hr>
+	{% endfor %}
+</div>
+{% else %}
+<h5 class="text-danger"><i>You currently have an empty Cart</i></h5>
+{% endif %}
+
+
+
+{% endblock content %} 

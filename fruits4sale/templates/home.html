@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<form action="">
+    <div class="mb-3">
+      <label class="form-label">Search for Fruits:</label>
+      <input type="text" name="searchMovie" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">
+      Search
+    </button>
+  </form>
+  <p>Searching for: {{ searchTerm }}</p>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% if fruitdata %}
+    {% for data in fruitdata %}
+    
+    <div v-for="movie in movies" class="col">
+      <div class="card shadow p-3 mb-5 bg-body rounded">
+        <a href="{% url 'purchase' data.id %}">
+        <img class="card-img-top" src="{{ data.image.url }}" height="300px" />
+        </a>
+        <div class="card-body ">
+          <a href="{% url 'purchase' data.id %}" class="link-dark">
+            <h5 class="card-title fw-bold">{{ data.fruit_name }}</h5>
+          </a>
+          <p class="card-text">Php. {{ data.price_per_quantity|floatformat:2 }}/{{ data.units }}</p>
+          
+        </div>
+      </div>
+    </div>
+    
+    {% endfor %}
+    {% else %}
+    <h5 class="text-danger">No data available</h5>
+    {% endif %}
+  </div>
+
+
+  {% for i in users %}
+  <p>{{ i.username }}</p>
+
+  <p>{{ i.password }}</p>
+  {% endfor %}
+
+{% endblock content %} 

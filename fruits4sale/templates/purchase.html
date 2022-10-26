@@ -1,0 +1,45 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+
+{% for message in messages %}
+	{% if messages %}
+	<script>alert("{{ message }}");</script>
+	{% endif %}  	
+{% endfor %}
+
+
+
+<p> Purchase </p>
+
+
+<div class="container">
+	<div class="row align-items-start">
+		<div class="col">
+			<img class="card-img-top shadow p-3 mb-5 bg-body rounded" src="{{ fruitdata.image.url }}" />
+		</div>
+		<div class="col">
+		
+			<p>Fruit Name: <b>{{ fruitdata.fruit_name }}</b></p>
+			<p>Description: <b>{{ fruitdata.description }}</b></p>
+			{% if fruitdata.quantity == 0 %}
+			<p>Available Quantity: <b class="text-danger">Sorry this item is not available</b></p>
+			{% else %}
+			<p>Available Quantity: <b>{{ fruitdata.quantity }}</b></p>
+			{% endif %}
+			<p>Units: <b>{{ fruitdata.units }}</b></p>
+			<p>Price Per Unit: <b>Php. {{ fruitdata.price_per_quantity|floatformat:2 }}</b></p>
+			<form method="POST">
+            {% csrf_token %}
+		        {{ form.as_p }}
+		        <button type="submit" class="btn btn-primary">
+		          Purchase
+		        </button>
+          </form>
+		</div>
+		<div class="col">
+		
+	</div>
+</div>
+
+{% endblock content %} 
